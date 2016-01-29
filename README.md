@@ -6,7 +6,7 @@ Operating on the assumption that related data tend to live reasonably close toge
 
 ### "Use cases"
 
-Under the hood, `Enumerator` is implemented in terms of fibers so as to support suspension and resumption. CRuby does the right thing by not exposing this implementation detail directly, but maybe we want a reference to the underlying `Fiber` anyway. We knows its [approximate location](https://git.io/vzNsN), so let's see if the **Lens of Truth** can help us home in on it:
+Under the hood, `Enumerator` is implemented in terms of fibers so as to support suspension and resumption. CRuby does the right thing by not exposing this implementation detail directly, but maybe we want a reference to the underlying `Fiber` anyway. We know its [approximate location](https://git.io/vzNsN), so let's see if the **Lens of Truth** can help us home in on it:
 
 ```ruby
 require 'fiber' # for Fiber#transfer
@@ -44,7 +44,7 @@ Finding the right `Proc` or `Array` is a little harder (read: non-deterministic)
 
 ### Usage
 
-`Object#find_nearby` uses case equality (`===`) when performing the search, so you can scan around for nearby strings matching some regular expression or a numeric object within a given range. You can instead pass a block to be used as the predicate. There's also an optional keyword argument `limit` which specifies how far to search in other direction before bailing. Examples follow.
+`Object#find_nearby` uses case equality (`===`) when performing the search, so you can scan around for nearby strings matching some regular expression or a numeric object within a given range. You can instead pass a block to be used as the predicate. There's also an optional keyword argument `limit` which specifies how far to search in either direction before bailing. Examples follow.
 
 ```ruby
 p Object.find_nearby /^[A-Z]+$/
